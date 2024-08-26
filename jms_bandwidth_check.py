@@ -28,15 +28,32 @@ def send_message_to_server_chan(title, desp, key):
         logging.error(f"发送消息到Server酱失败: {e}")
         return None
 
+def send_telegram_message(bot_token, chat_id, message):
+    url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
+    payload = {
+        "chat_id": chat_id,
+        "text": message,
+        "parse_mode": "Markdown"
+    }
+    try:
+        response = requests.post(url, json=payload)
+        response.raise_for_status()
+        return response.json()
+    except requests.RequestException as e:
+        logging.error(f"发送消息到Telegram失败: {e}")
+        return None
+
 def bytes_to_gb(bytes):
     return bytes / (2**30)
 
 def main():
-    # 从环境变量获取API URL和Server酱密钥
+    # 从环境变量获取API URL、Server酱密钥和Telegram信息
     api_url = os.environ.get('JMS_API_URL')
     server_chan_key = os.environ.get('SERVER_CHAN_KEY')
+    telegram_bot_token = os.environ.get('TELEGRAM_BOT_TOKEN')
+    telegram_chat_id = os.environ.get('TELEGRAM_CHAT_ID')
 
-    if not api_url or not server_chan_key:
+    if not api_url or not server_chan_key or not telegram_bot_token or not telegram_chat_id:
         logging.error("缺少必要的环境变量")
         return
 
@@ -54,12 +71,20 @@ def main():
 
     message_content = f"JMS已使用带宽: {used_bw_gb:.2f} GB ({used_percentage:.2f}%)\n总带宽限制: {total_bw_gb:.2f} GB\n带宽将在每月的第 {bw_reset_day} 日重置。"
 
-    response = send_message_to_server_chan("带宽使用通知", message_content, server_chan_key)
-    if response:
-        logging.info("消息发送成功")
-        logging.info(f"Server酱响应: {response}")
+    # 发送Server酱通知
+    server_chan_response = send_message_to_server_chan("带宽使用通知", message_content, server_chan_key)
+    if server_chan_response:
+        logging.info("Server酱消息发送成功")
     else:
-        logging.error("消息发送失败")
+        logging.error("Server酱消息发送失败")
+
+    # 发送Telegram通知
+    telegram_message = f"*JMS带宽使用通知*\n\n{message_content}"
+    telegram_response = send_telegram_message(telegram_bot_token, telegram_chat_id, telegram_message)
+    if telegram_response:
+        logging.info("Telegram消息发送成功")
+    else:
+        logging.error("Telegram消息发送失败")
 
 if __name__ == "__main__":
     main()
