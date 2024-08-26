@@ -69,17 +69,17 @@ def main():
     total_bw_gb = bytes_to_gb(total_bw_bytes)
     used_percentage = (used_bw_bytes / total_bw_bytes) * 100
 
-    message_content = f"JMS已使用带宽: {used_bw_gb:.2f} GB ({used_percentage:.2f}%)\n总带宽限制: {total_bw_gb:.2f} GB\n带宽将在每月的第 {bw_reset_day} 日重置。"
+    message_content = f"JMS已使用流量: {used_bw_gb:.2f} GB ({used_percentage:.2f}%)\n总流量限制: {total_bw_gb:.2f} GB\n流量将在每月的第 {bw_reset_day} 日重置。"
 
     # 发送Server酱通知
-    server_chan_response = send_message_to_server_chan("带宽使用通知", message_content, server_chan_key)
+    server_chan_response = send_message_to_server_chan("流量使用通知", message_content, server_chan_key)
     if server_chan_response:
         logging.info("Server酱消息发送成功")
     else:
         logging.error("Server酱消息发送失败")
 
     # 发送Telegram通知
-    telegram_message = f"*JMS带宽使用通知*\n\n{message_content}"
+    telegram_message = f"*JMS流量使用通知*\n\n{message_content}"
     telegram_response = send_telegram_message(telegram_bot_token, telegram_chat_id, telegram_message)
     if telegram_response:
         logging.info("Telegram消息发送成功")
