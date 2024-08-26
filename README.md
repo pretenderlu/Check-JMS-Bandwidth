@@ -13,7 +13,7 @@ Install requests: 安装 requests 库，用于发送 HTTP 请求。
 
 # Check JMS bandwidth and send notification:
 设置 SERVER_CHAN_KEY 环境变量，从 GitHub Secrets 中获取值。
-运行 jms_bandwidth_check.py 脚本（请将此文件名替换为您实际保存 Python 代码的文件名）。
+运行jms_bandwidth_check.py 脚本（请将此文件名替换为您实际保存 Python 代码的文件名）。
 
 # 使用方法：
 将上述 YAML 代码保存为 .github/workflows/check_jms_bandwidth.yml 文件，并提交到您的 GitHub 仓库。
