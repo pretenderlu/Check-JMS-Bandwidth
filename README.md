@@ -6,7 +6,7 @@ Check JMS Bandwidth with Github Action
 蛮好玩的~~
 
 # Check JMS bandwidth and send notification:
-在 GitHub 仓库的 Settings > Secrets and variables > Actions 中添加两个key：
+在 GitHub 仓库的 Settings > Secrets and variables > Actions 中添加两个key：   
 JMS_API_URL: 设置为你的 API URL  
 SERVER_CHAN_KEY: 设置为你的 Server 酱 API 密钥
 
