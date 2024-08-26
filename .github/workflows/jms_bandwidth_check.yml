@@ -26,4 +26,6 @@ jobs:
       env:
         JMS_API_URL: ${{ secrets.JMS_API_URL }}
         SERVER_CHAN_KEY: ${{ secrets.SERVER_CHAN_KEY }}
+        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
       run: python jms_bandwidth_check.py
