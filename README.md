@@ -2,14 +2,8 @@
 Check JMS Bandwidth with Github Action
 
 # 说明:
-name: 操作的名称，这里命名为 "Check JMS Bandwidth"。   
-on.schedule: 定义触发器，使用 cron 表达式设置每天早上 8 点运行。  
-jobs.check_bandwidth: 定义名为 "check_bandwidth" 的任务。  
-runs-on: 指定运行环境为 ubuntu-latest。  
-steps: 定义任务的执行步骤：  
-Checkout repository: 检出仓库代码，以便访问 Python 脚本。  
-Set up Python: 设置 Python 环境。  
-Install requests: 安装 requests 库，用于发送 HTTP 请求。  
+之前让ChatGPT出了一个python代码扔服务器里跑来着，不知道怎么估计被我误删除了，这几天都没效果了，索性让Claude帮忙出个新的，扔Github Action吧~~  
+蛮好玩的~~
 
 # Check JMS bandwidth and send notification:
 设置 SERVER_CHAN_KEY 环境变量，从 GitHub Secrets 中获取值。  
