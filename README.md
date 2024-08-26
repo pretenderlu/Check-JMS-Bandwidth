@@ -6,8 +6,9 @@ Check JMS Bandwidth with Github Action
 蛮好玩的~~
 
 # Check JMS bandwidth and send notification:
-设置 SERVER_CHAN_KEY 环境变量，从 GitHub Secrets 中获取值。  
-运行jms_bandwidth_check.py 脚本（请将此文件名替换为您实际保存 Python 代码的文件名）。
+在 GitHub 仓库的 Settings > Secrets and variables > Actions 中添加两个key：
+JMS_API_URL: 设置为你的 API URL  
+SERVER_CHAN_KEY: 设置为你的 Server 酱 API 密钥
 
 # 使用方法：
 将上述 YAML 代码保存为 .github/workflows/check_jms_bandwidth.yml 文件，并提交到您的 GitHub 仓库。  
